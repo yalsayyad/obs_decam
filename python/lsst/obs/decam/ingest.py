@@ -24,15 +24,6 @@ import re
 import lsst.afw.image as afwImage
 from lsst.pipe.tasks.ingest import ParseTask, IngestTask, IngestArgumentParser
 
-def parseExtname(md):
-    side, ccd = "X", 0
-    if not md.exists("EXTNAME"):
-        return side, ccd
-    extname = md.get("EXTNAME").strip()
-    if extname[0] in "NS":
-        side = extname[0]
-    ccd = int(extname[1:])
-    return side, ccd
 
 class DecamIngestArgumentParser(IngestArgumentParser):
     def __init__(self, *args, **kwargs):
@@ -195,14 +186,6 @@ class DecamParseTask(ParseTask):
                     extnames.discard(ext)
         return phuInfo, infoList
     
-    def translate_side(self, md):
-        side, ccd = parseExtname(md)
-        return side
-
-    def translate_ccd(self, md):
-        side, ccd = parseExtname(md)
-        return ccd
-
     @staticmethod
     def getExtensionName(md):
         return md.get('EXTNAME')

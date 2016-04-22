@@ -4,8 +4,8 @@ needCalibRegistry: true
 
 levels: {
     # Keys that are NOT relevant for a particular level
-    skyTile: "visit" "ccdnum" "hdu"
-    visit: "ccdnum" "hdu"
+    skyTile: "visit" "ccdnum" "hdu" "ccd"
+    visit: "ccdnum" "hdu" "ccd"
     ccd: "none"
 }
 defaultLevel: "ccd"
@@ -26,6 +26,7 @@ exposures: {
         tables:      "raw"
         columns:     "visit"
         columns:     "ccdnum"
+        columns:     "ccd"
     }
     postISRCCD: {
         template:    "%(visit)07d/postISR/postISR-%(visit)07d_%(ccdnum)02d.fits"
@@ -84,6 +85,7 @@ exposures: {
         tables:      "raw"
         columns:     "visit"
         columns:     "ccdnum"
+        columns:     "ccd"
     }
     deepCoadd_tempExp: {
         template:    "deepCoadd/%(filter)s/%(tract)d/%(patch)stempExp/v%(visit)d-f%(filter)s.fits"
@@ -309,6 +311,7 @@ datasets: {
         persistable:   "SourceCatalog"
         storage:       "FitsCatalogStorage"
         tables:        "raw"
+        columns:       "ccd"
     }
     icMatch: {
         template:      "%(visit)07d/icMatch/icMatch-%(visit)07d_%(ccdnum)02d.fits"

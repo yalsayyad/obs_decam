@@ -74,6 +74,11 @@ class ProcessCcdTestCase(utilsTests.TestCase):
         self.assertEqual(exp.getWidth(), 2048)
         self.assertEqual(exp.getHeight(), 4096)
 
+    def testCcdKey(self):
+        """Test to retrieve calexp using ccd as the ccd key"""
+        exp = self.butler.get("calexp", visit=229388, ccd=1, immediate=True)
+        self.assertIsInstance(exp, afwImage.ExposureF)
+
     def testWcsPostIsr(self):
         """Test the wcs of postISRCCD products
 

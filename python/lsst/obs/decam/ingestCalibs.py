@@ -27,6 +27,11 @@ class DecamCalibsParseTask(CalibsParseTask):
                 info['calibDate'] = date
         return phuInfo, infoList
 
+    def _translateFromCalibId(self, field, md):
+        data = md.get("CALIB_ID")
+        match = re.search(".*%s=(\S+)" % field, data)
+        return match.groups()[0]
+
     def translate_ccdnum(self, md):
         """Return CCDNUM as a integer
 
@@ -35,8 +40,7 @@ class DecamCalibsParseTask(CalibsParseTask):
         if md.exists("CCDNUM"):
             ccdnum = md.get("CCDNUM")
         else:
-            self.log.warn("Unable to find value for CCDNUM")
-            ccdnum = None
+            return self._translateFromCalibId("ccdnum", md)
         # Some MasterCal from NOAO Archive has 2 CCDNUM keys in each HDU
         # Make sure only one integer is returned.
         if isinstance(ccdnum, collections.Sequence):

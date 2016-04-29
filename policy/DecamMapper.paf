@@ -6,12 +6,12 @@ levels: {
     # Keys that are NOT relevant for a particular level
     skyTile: "visit" "ccdnum" "hdu" "ccd"
     visit: "ccdnum" "hdu" "ccd"
-    ccd: "none"
+    sensor: "none"
 }
-defaultLevel: "ccd"
+defaultLevel: "sensor"
 defaultSubLevels: {
-    skyTile: "ccd"
-    visit: "ccd"
+    skyTile: "sensor"
+    visit: "sensor"
 }
 
 camera: "../decam/camGeom"

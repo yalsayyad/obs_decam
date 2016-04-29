@@ -51,11 +51,11 @@ class ButlerTestCase(unittest.TestCase):
 
     def testButlerSubsetLevel(self):
         """Test if subset is gathered correctly for the specified level"""
-        subset = self.butler.subset("raw", level="ccd", visit=229388, ccdnum=1)
+        subset = self.butler.subset("raw", level="sensor", visit=229388, ccdnum=1)
         print("ButlerSubset.cache: %s" % subset.cache)
         self.assertEqual(len(subset), 1)
 
-        subset = self.butler.subset("raw", level="ccd", visit=229388)
+        subset = self.butler.subset("raw", level="sensor", visit=229388)
         print("ButlerSubset.cache: %s" % subset.cache)
         self.assertEqual(len(subset), 2)
 

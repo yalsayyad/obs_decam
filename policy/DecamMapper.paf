@@ -5,6 +5,7 @@ needCalibRegistry: true
 levels: {
     # Keys that are NOT relevant for a particular level
     skyTile: "visit" "ccdnum" "hdu" "ccd"
+    tract: "patch"
     visit: "ccdnum" "hdu" "ccd"
     sensor: "none"
 }

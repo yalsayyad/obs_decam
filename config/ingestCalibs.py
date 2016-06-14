@@ -21,5 +21,5 @@ config.register.columns = {'filter': 'text',
                          }
 config.register.detector = ['filter', 'ccdnum']
 config.register.unique = ['filter', 'ccdnum', 'calibDate']
-config.register.tables = ['bias', 'flat', 'fringe', 'defect']
+config.register.tables = ['bias', 'flat', 'fringe', 'defect', 'dark']
 config.register.visit = ['calibDate']

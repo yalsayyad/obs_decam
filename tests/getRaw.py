@@ -51,6 +51,7 @@ class GetRawTestCase(unittest.TestCase):
         self.dataId = {'visit': 229388, 'ccdnum': 1}
         self.filter = "z"
         self.exptime = 200.0
+        self.darktime = 201.15662
 
     def tearDown(self):
         del self.butler
@@ -77,6 +78,7 @@ class GetRawTestCase(unittest.TestCase):
         # Metadata which should have been copied from zeroth extension.
         self.assertIn("MJD-OBS", exp.getMetadata().paramNames())
         self.assertEqual(exp.getCalib().getExptime(), self.exptime)
+        self.assertEqual(exp.getMetadata().get("DARKTIME"), self.darktime)
 
         # Example of metadata which should *not* have been copied from zeroth extension.
         self.assertNotIn("PROPOSER", exp.getMetadata().paramNames())

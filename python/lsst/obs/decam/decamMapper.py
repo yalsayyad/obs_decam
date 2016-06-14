@@ -209,7 +209,7 @@ class DecamMapper(CameraMapper):
         headerPath = re.sub(r'[\[](\d+)[\]]$', "[0]", rawPath)
         md0 = afwImage.readMetadata(headerPath)
         # Keywords EXPTIME and MJD-OBS are used to set the calib object.
-        for kw in ('EXPTIME', 'MJD-OBS'):
+        for kw in ('EXPTIME', 'MJD-OBS', 'DARKTIME'):
             if kw in md0.paramNames() and kw not in md.paramNames():
                 md.add(kw, md0.get(kw))
         # As TPV is not supported yet, the wcs keywords are not pruned

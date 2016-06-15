@@ -138,7 +138,7 @@ exposures: {
 }
 
 calibrations: {
-    bias: {
+    cpBias: {
         # Given that MasterCal hdu number is identical to ccdnum
         template:    "%(path)s[%(ccdnum)d]"
         python:      "lsst.afw.image.DecoratedImageF"
@@ -153,7 +153,7 @@ calibrations: {
         validRange:  true
         obsTimeName: date
     }
-    flat: {
+    cpFlat: {
         template:    "%(path)s[%(ccdnum)d]"
         python:      "lsst.afw.image.DecoratedImageF"
         persistable: "DecoratedImageF"

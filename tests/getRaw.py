@@ -91,7 +91,7 @@ class GetRawTestCase(unittest.TestCase):
 
     def testBias(self):
         """Test retrieval of bias image"""
-        exp = self.butler.get("bias", self.dataId)
+        exp = self.butler.get("cpBias", self.dataId)
         print("dataId: %s" % self.dataId)
         print("detector id: %s" % exp.getDetector().getId())
         self.assertEqual(exp.getDetector().getId(), self.dataId["ccdnum"])
@@ -99,7 +99,7 @@ class GetRawTestCase(unittest.TestCase):
 
     def testFlat(self):
         """Test retrieval of flat image"""
-        exp = self.butler.get("flat", self.dataId)
+        exp = self.butler.get("cpFlat", self.dataId)
         print("dataId: %s" % self.dataId)
         print("detector id: %s" % exp.getDetector().getId())
         print("filter: %s" % self.filter)

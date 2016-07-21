@@ -229,6 +229,19 @@ class DecamMapper(CameraMapper):
         return self._standardizeExposure(self.exposures['raw'], exp, dataId,
                                          trimmed=False)
 
+    def std_dark(self, item, dataId):
+        exp = afwImage.makeExposure(afwImage.makeMaskedImage(item))
+        exp.getCalib().setExptime(1.0)
+        return self._standardizeExposure(self.calibrations["dark"], exp, dataId, filter=False)
+
+    def std_bias(self, item, dataId):
+        exp = afwImage.makeExposure(afwImage.makeMaskedImage(item))
+        return self._standardizeExposure(self.calibrations["bias"], exp, dataId, filter=False)
+
+    def std_flat(self, item, dataId):
+        exp = afwImage.makeExposure(afwImage.makeMaskedImage(item))
+        return self._standardizeExposure(self.calibrations["flat"], exp, dataId, filter=False)
+
     def _standardizeCpMasterCal(self, datasetType, item, dataId, setFilter=False):
         """Standardize a MasterCal image obtained from NOAO archive into Exposure
 

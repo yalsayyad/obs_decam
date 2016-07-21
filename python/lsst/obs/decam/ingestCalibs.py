@@ -64,8 +64,9 @@ class DecamCalibsParseTask(CalibsParseTask):
             else:
                 self.log.warn("DATE-OBS does not match format YYYY-MM-DD")
                 date = "unknown"
+        elif md.exists("CALIB_ID"):
+            date = self._translateFromCalibId("calibDate", md)
         else:
-            self.log.warn("Unable to find value for DATE-OBS")
             date = "unknown"
         return date
 
@@ -78,9 +79,12 @@ class DecamCalibsParseTask(CalibsParseTask):
 
         @param md (PropertySet) FITS header metadata
         """
-        if not md.exists("FILTER"):
+        if md.exists("FILTER"):
+            return CalibsParseTask.translate_filter(self, md)
+        elif md.exists("CALIB_ID"):
+            return self._translateFromCalibId("filter", md)
+        else:
             return "unknown"
-        return CalibsParseTask.translate_filter(self, md)
 
     @staticmethod
     def getExtensionName(md):

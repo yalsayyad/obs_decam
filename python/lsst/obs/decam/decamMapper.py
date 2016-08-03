@@ -157,23 +157,25 @@ class DecamMapper(CameraMapper):
         instcalMap  = self.map_instcal(dataId)
         dqmaskMap   = self.map_dqmask(dataId)
         wtmapMap    = self.map_wtmap(dataId)
+        rawMap      = self.map_raw(dataId)
         instcalType = getattr(afwImage, instcalMap.getPythonType().split(".")[-1])
+        rawType     = getattr(afwImage, rawMap.getPythonType().split(".")[-1])
         dqmaskType  = getattr(afwImage, dqmaskMap.getPythonType().split(".")[-1])
         wtmapType   = getattr(afwImage, wtmapMap.getPythonType().split(".")[-1])
         instcal     = instcalType(instcalMap.getLocations()[0])
         dqmask      = dqmaskType(dqmaskMap.getLocations()[0])
         wtmap       = wtmapType(wtmapMap.getLocations()[0])
-
+        raw         = rawType(rawMap.getLocations()[0])
         mask        = self.translate_dqmask(dqmask)
         variance    = self.translate_wtmap(wtmap)
 
         mi          = afwImage.MaskedImageF(afwImage.ImageF(instcal.getImage()), mask, variance)
-        md          = instcal.getMetadata()
+        md          = raw.getMetadata()
         wcs         = afwImage.makeWcs(md)
         exp         = afwImage.ExposureF(mi, wcs)
 
         # Set the calib by hand; need to grab the zeroth extension
-        header = re.sub(r'[\[](\d+)[\]]$', "[0]", instcalMap.getLocations()[0])
+        header = re.sub(r'[\[](\d+)[\]]$', "[0]", rawMap.getLocations()[0])
         md0 = afwImage.readMetadata(header)
         calib = afwImage.Calib()
         calib.setExptime(md0.get("EXPTIME"))

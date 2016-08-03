@@ -18,7 +18,7 @@ camera: "../decam/camGeom"
 
 exposures: {
     raw: {
-        template:    "%(date)s/%(filter)s/decam%(visit)07d.fits.fz[%(hdu)d]"
+        template:    "%(visit)07d/instcal%(visit)07d.fits.fz[%(ccdnum)d]"
         python:      "lsst.afw.image.DecoratedImageF"
         persistable: "DecoratedImageF"
         storage:     "FitsStorage"
@@ -36,7 +36,7 @@ exposures: {
         tables:      "raw"
     }
     instcal: {
-        template:    "%(visit)07d/instcal%(visit)07d.fits.fz[%(ccdnum)d]"
+        template:    "crblasted%(visit)07d/instcal%(visit)07d.%(ccdnum)d.fits"
         python:      "lsst.afw.image.DecoratedImageF"
         persistable: "DecoratedImageF"
         storage:     "FitsStorage"
